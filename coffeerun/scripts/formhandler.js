@@ -13,7 +13,7 @@
     }
   }
   FormHandler.prototype.addSubmitHandler = function (fn){
-    console.log('Setting submit handler for form');
+  //  console.log('Setting submit handler for form');
     this.$formElement.on('submit', function (event){
       event.preventDefault();
       var data = {};

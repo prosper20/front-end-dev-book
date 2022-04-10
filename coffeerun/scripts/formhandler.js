@@ -22,9 +22,23 @@
         console.log(item.name +' is '+ item.value);
       });
       console.log(data);
-      fn(data);
-      this.reset();
-      this.elements[0].focus();
+      fn(data).then(function() {
+        this.reset();
+        this.elements[0].focus();
+      }.bind(this));
+    });
+  };
+  FormHandler.prototype.addInputHandler = function (fn){
+    console.log('Settting input handler for form');
+    this.$formElement.on('input', '[name="emailAddress"]',  function (event){
+      var emailAddress = event.target.value;
+      var message = '';
+      if(fn(emailAddress)){
+        event.target.setCustomValidity('');
+      }else{
+        message = emailAddress + ' is not an authorised email address!';
+        event.target.setCustomValidity(message);
+      }
     });
   };
 
